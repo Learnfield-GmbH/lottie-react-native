@@ -10,10 +10,12 @@ Pod::Spec.new do |s|
   s.authors      = { "intelligibabble" => "leland.m.richardson@gmail.com" }
   s.homepage     = "https://github.com/Learnfield-GmbH/lottie-react-native.git#readme"
   s.license      = package['license']
-  s.platform     = :ios, "9.0"
+  s.ios.deployment_target = '9.0'
+  s.osx.deployment_target = '10.10'
 
   s.source       = { :git => "https://github.com/Learnfield-GmbH/lottie-react-native.git", :tag => "v#{s.version}" }
   s.source_files  = "src/ios/**/*.{h,m,swift}"
+
   s.swift_version = "5.0"
   s.dependency 'React'
 
