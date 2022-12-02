@@ -24,8 +24,8 @@ Pod::Spec.new do |s|
   s.swift_version = "5.0"
   s.dependency 'React-Core'
   s.pod_target_xcconfig = { 'OTHER_LDFLAGS' => '$(inherited) -framework Lottie',
-                            'FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*]' => '$(inherited) ../../ios/Submodules/Wynton/Submodules/Dependencies/Frameworks/Lottie.xcframework/ios-arm64_armv7',
-                            'FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*]' => '$(inherited) ../../ios/Submodules/Wynton/Submodules/Dependencies/Frameworks/Lottie.xcframework/ios-arm64_i386_x86_64-simulator'
+                            'FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*]' => '$(inherited) ../../ios/Submodules/Wynton/Submodules/Dependencies/Frameworks/Lottie.xcframework/ios-arm64',
+                            'FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*]' => '$(inherited) ../../ios/Submodules/Wynton/Submodules/Dependencies/Frameworks/Lottie.xcframework/ios-arm64_x86_64-simulator'
                            }
 
 end
