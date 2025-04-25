@@ -10,7 +10,6 @@ class ContainerView: RCTView {
     private var sourceName: String = ""
     private var colorFilters: [NSDictionary] = []
     private var textFilters: [NSDictionary] = []
-    private var renderMode: RenderingEngineOption = .automatic
     @objc var onAnimationFinish: RCTBubblingEventBlock?
     var animationView: LottieAnimationView?
 
@@ -70,41 +69,6 @@ class ContainerView: RCTView {
         }
     }
 
-    func getLottieConfiguration() -> LottieConfiguration {
-        return LottieConfiguration(
-            renderingEngine: renderMode
-        )
-    }
-       
-    @objc func setRenderMode(_ newRenderMode: String) {
-        switch newRenderMode {
-        case "SOFTWARE":
-            if (renderMode == .mainThread) {
-                return
-            }
-            renderMode = .mainThread
-        case "HARDWARE":
-            if (renderMode == .coreAnimation) {
-                return
-            }
-            renderMode = .coreAnimation
-        case "AUTOMATIC":
-            fallthrough
-        default:
-            if (renderMode == .automatic) {
-                return
-            }
-            renderMode = .automatic
-        }
-        if (animationView != nil) {
-            let starAnimationView = LottieAnimationView(
-                animation: animationView?.animation,
-                configuration: getLottieConfiguration()
-            )
-            replaceAnimationView(next: starAnimationView)
-        }
-    }
-
     @objc func setSourceURL(_ newSourceURLString: String) {
         var url = URL(string: newSourceURLString)
         
@@ -126,10 +90,8 @@ class ContainerView: RCTView {
                     }
 
                     DispatchQueue.main.async {
-                        let starAnimationView = LottieAnimationView(
-                            animation: animation,
-                            configuration: self.getLottieConfiguration()
-                        )
+                        let starAnimationView = LottieAnimationView()
+                        starAnimationView.animation = animation
                         self.replaceAnimationView(next: starAnimationView)
                         self.animationView?.play()
                     }
@@ -153,10 +115,8 @@ class ContainerView: RCTView {
             return
         }
 
-        let starAnimationView = LottieAnimationView(
-            animation: animation,
-            configuration: getLottieConfiguration()
-        )
+        let starAnimationView = LottieAnimationView()
+        starAnimationView.animation = animation
         replaceAnimationView(next: starAnimationView)
     }
 
@@ -166,10 +126,7 @@ class ContainerView: RCTView {
         }
         sourceName = newSourceName
 
-        let starAnimationView = LottieAnimationView(
-            name: sourceName,
-            configuration: getLottieConfiguration()
-        )
+        let starAnimationView = LottieAnimationView(name: sourceName)
         replaceAnimationView(next: starAnimationView)
     }
 
